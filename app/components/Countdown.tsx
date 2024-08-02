@@ -20,23 +20,28 @@ const CountdownTimer = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft())
+    const timer = setInterval(() => {
+      const updatedTimeLeft = calculateTimeLeft()
+      setTimeLeft(updatedTimeLeft)
+
+      if (Object.keys(updatedTimeLeft).length === 0) {
+        clearInterval(timer)
+      }
     }, 1000)
 
-    // Clear timeout if the component is unmounted
-    return () => clearTimeout(timer)
-  })
+    // Clear interval if the component is unmounted
+    return () => clearInterval(timer)
+  }, [])
 
   const timerComponents = []
 
-  Object.keys(timeLeft).forEach((interval) => {
+  Object.keys(timeLeft).forEach((interval, index) => {
     if (!timeLeft[interval]) {
       return
     }
 
     timerComponents.push(
-      <span className='m-1 p-1'>
+      <span key={index} className='m-1 p-1'>
         {timeLeft[interval]} {interval}{' '}
       </span>
     )
