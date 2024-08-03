@@ -20,7 +20,7 @@ export default function Index() {
             <div className='flex gap-4'>
               <div className='flex flex-col items-center'>
                 <div className='text-sm text-muted-foreground'>
-                  <CountdownTimer targetDate='8.16.2024' />
+                  <CountdownTimer targetDate='August 16, 2024' />
                 </div>
               </div>
             </div>
